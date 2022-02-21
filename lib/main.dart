@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(
+    MaterialApp(
+      title: 'Flutter 1.0',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => MyHomePage(title: 'Flutter Navigator 1.0 Home Page'),
+        '/pages/1': (context) => const Page1(),
+        '/pages/2': (context) => const Page2(),
+      },
+    ),
+  );
 }
 
 //INFO: The possible page transitions are
@@ -11,20 +24,6 @@ void main() {
 //d) Page 1 -> Page 2
 //e) Page 2 -> Page 1
 //f) Page 2 -> Home Page
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter 1.0',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Navigator 1.0 Home Page'),
-    );
-  }
-}
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -50,9 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               onPressed: () {
-                //TODO: write the navigator code to go to Page 1
-                //you can either create a MaterialPageRoute or use
-                //named routes whichever you prefer
+                Navigator.pushNamed(context, '/pages/1');
               },
               child: Text("Go To Page 1"),
             ),
@@ -61,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 //TODO: write the navigator code to go to Page 2
                 //you can either create a MaterialPageRoute or use
                 //named routes whichever you prefer
+                Navigator.pushNamed(context, '/pages/2');
               },
               child: Text("Go To Page 2"),
             ),
@@ -84,17 +82,13 @@ class Page1 extends StatelessWidget {
             Text('Page 1 Landing'),
             TextButton(
               onPressed: () {
-                //TODO: write the navigator code to go to Page 2
-                //you can either create a MaterialPageRoute or use
-                //named routes whichever you prefer
+                Navigator.pushNamed(context, '/pages/2');
               },
               child: Text('Go to Page 2'),
             ),
             TextButton(
               onPressed: () {
-                //TODO: write the navigator code to go to Home Page
-                //you can either create a MaterialPageRoute or use
-                //named routes whichever you prefer
+                Navigator.pushNamed(context, '/');
               },
               child: Text('E.T Go Home'),
             ),
@@ -117,17 +111,13 @@ class Page2 extends StatelessWidget {
             Text('Page 2 Landing'),
             TextButton(
               onPressed: () {
-                //TODO: write the navigator code to go to Page 1
-                //you can either create a MaterialPageRoute or use
-                //named routes whichever you prefer
+                Navigator.pop(context); // button text says 'Go Back' => so popping
               },
               child: Text('Go Back'),
             ),
             TextButton(
               onPressed: () {
-                //TODO: write the navigator code to go to Home Page
-                //you can either create a MaterialPageRoute or use
-                //named routes whichever you prefer
+                Navigator.pushNamed(context, '/');
               },
               child: Text('E.T Go Home'),
             ),
