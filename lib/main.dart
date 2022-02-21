@@ -55,10 +55,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             TextButton(
               onPressed: () {
-                //TODO: write the navigator code to go to Page 2
-                //you can either create a MaterialPageRoute or use
-                //named routes whichever you prefer
-                Navigator.pushNamed(context, '/pages/2');
+                // demonstrating using MaterialPageRoute rather than pushNamed()
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Page2())
+                );
               },
               child: Text("Go To Page 2"),
             ),
@@ -111,7 +112,7 @@ class Page2 extends StatelessWidget {
             Text('Page 2 Landing'),
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // button text says 'Go Back' => so popping
+                Navigator.pop(context); // button text says 'Go Back' => so popping to Page1 or MyHomePage
               },
               child: Text('Go Back'),
             ),
