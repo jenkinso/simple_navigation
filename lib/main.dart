@@ -88,6 +88,12 @@ class Page1 extends StatelessWidget {
               child: Text('Go to Page 2'),
             ),
             TextButton(
+              child: Text('Show further info'),
+              onPressed: () {
+                _showDialog(context);
+              },
+            ),
+            TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/');
               },
@@ -96,6 +102,22 @@ class Page1 extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  Future<void> _showDialog(BuildContext context) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Further info'),
+          content: const Text('You are on Page 1!'),
+          actions: [
+            TextButton(onPressed: () => Navigator.pop(context),child: const Text('Ok!'))
+          ]
+        );
+      }
     );
   }
 }
