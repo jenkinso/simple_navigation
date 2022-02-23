@@ -114,7 +114,7 @@ class Page1 extends StatelessWidget {
           title: const Text('Further info'),
           content: const Text('You are on Page 1!'),
           actions: [
-            TextButton(onPressed: () => Navigator.pop(context),child: const Text('Ok!'))
+            TextButton(onPressed: () => Navigator.pop(context), child: const Text('Ok!'))
           ]
         );
       }
@@ -122,8 +122,16 @@ class Page1 extends StatelessWidget {
   }
 }
 
-class Page2 extends StatelessWidget {
+class Page2 extends StatefulWidget {
   const Page2({Key? key}) : super(key: key);
+
+  @override
+  _Page2State createState() => _Page2State();
+}
+
+class _Page2State extends State<Page2> {
+
+  String _message = '';
 
   @override
   Widget build(BuildContext context) {
@@ -144,6 +152,41 @@ class Page2 extends StatelessWidget {
               },
               child: Text('E.T Go Home'),
             ),
+            ElevatedButton(
+                onPressed: () async {
+                  String? result = await showMenu(
+                      context: context,
+                      position: RelativeRect.fromLTRB(0, 0, 0, 0),
+                      items: <PopupMenuEntry<String>>[
+                        const PopupMenuItem<String>(
+                          value: 'Rubbish',
+                          child: Text('Rubbish'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Not good',
+                          child: Text('Not good'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Distinctly average',
+                          child: Text('Distinctly average'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Better than average',
+                          child: Text('Better than average'),
+                        ),
+                        const PopupMenuItem<String>(
+                          value: 'Tanfastic',
+                          child: Text('Tanfastic'),
+                        ),
+                      ]
+                  );
+                  setState(() {
+                    result == null ? null : _message = 'You rated this app: $result';
+                  });
+                },
+                child: Text('Rate this app')
+            ),
+            Text(_message, style: TextStyle(color: Colors.blue, fontSize: 18)),
           ],
         ),
       ),
